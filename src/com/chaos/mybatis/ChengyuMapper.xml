@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chaos.dao.ChengyuMapper" >
+  <resultMap id="BaseResultMap" type="com.chaos.model.Chengyu" >
+    <id column="id" property="id" jdbcType="SMALLINT" />
+    <result column="ChengYu" property="chengyu" jdbcType="VARCHAR" />
+    <result column="PingYin" property="pingyin" jdbcType="VARCHAR" />
+    <result column="DianGu" property="diangu" jdbcType="VARCHAR" />
+    <result column="LiZi" property="lizi" jdbcType="VARCHAR" />
+    <result column="SPingYin" property="spingyin" jdbcType="CHAR" />
+    <result column="ChuChu" property="chuchu" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from chengyu
+    where id = #{id,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.chaos.model.Chengyu" >
+    insert into chengyu (id, ChengYu, PingYin, 
+      DianGu, LiZi, SPingYin, 
+      ChuChu)
+    values (#{id,jdbcType=SMALLINT}, #{chengyu,jdbcType=VARCHAR}, #{pingyin,jdbcType=VARCHAR}, 
+      #{diangu,jdbcType=VARCHAR}, #{lizi,jdbcType=VARCHAR}, #{spingyin,jdbcType=CHAR}, 
+      #{chuchu,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.chaos.model.Chengyu" >
+    update chengyu
+    set ChengYu = #{chengyu,jdbcType=VARCHAR},
+      PingYin = #{pingyin,jdbcType=VARCHAR},
+      DianGu = #{diangu,jdbcType=VARCHAR},
+      LiZi = #{lizi,jdbcType=VARCHAR},
+      SPingYin = #{spingyin,jdbcType=CHAR},
+      ChuChu = #{chuchu,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select id, ChengYu, PingYin, DianGu, LiZi, SPingYin, ChuChu
+    from chengyu
+    where id = #{id,jdbcType=SMALLINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, ChengYu, PingYin, DianGu, LiZi, SPingYin, ChuChu
+    from chengyu
+  </select>
+</mapper>

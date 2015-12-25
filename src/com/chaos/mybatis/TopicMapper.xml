@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chaos.dao.TopicMapper" >
+  <resultMap id="BaseResultMap" type="com.chaos.model.Topic" >
+    <id column="topic_id" property="topicId" jdbcType="BIGINT" />
+    <result column="topic_name" property="topicName" jdbcType="VARCHAR" />
+    <result column="banner_url" property="bannerUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="position" property="position" jdbcType="INTEGER" />
+    <result column="goods_count" property="goodsCount" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="BIT" />
+    <result column="owner_id" property="ownerId" jdbcType="INTEGER" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from topic
+    where topic_id = #{topicId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.chaos.model.Topic" >
+    insert into topic (topic_id, topic_name, banner_url, 
+      status, position, goods_count, 
+      is_delete, owner_id, add_time, 
+      modify_time)
+    values (#{topicId,jdbcType=BIGINT}, #{topicName,jdbcType=VARCHAR}, #{bannerUrl,jdbcType=VARCHAR}, 
+      #{status,jdbcType=BIT}, #{position,jdbcType=INTEGER}, #{goodsCount,jdbcType=INTEGER}, 
+      #{isDelete,jdbcType=BIT}, #{ownerId,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.chaos.model.Topic" >
+    update topic
+    set topic_name = #{topicName,jdbcType=VARCHAR},
+      banner_url = #{bannerUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      position = #{position,jdbcType=INTEGER},
+      goods_count = #{goodsCount,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=BIT},
+      owner_id = #{ownerId,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where topic_id = #{topicId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select topic_id, topic_name, banner_url, status, position, goods_count, is_delete, 
+    owner_id, add_time, modify_time
+    from topic
+    where topic_id = #{topicId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select topic_id, topic_name, banner_url, status, position, goods_count, is_delete, 
+    owner_id, add_time, modify_time
+    from topic
+  </select>
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chaos.dao.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.chaos.model.Message" >
+    <id column="message_id" property="messageId" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="owner" property="owner" jdbcType="VARCHAR" />
+    <result column="scope" property="scope" jdbcType="BIT" />
+    <result column="type" property="type" jdbcType="BIT" />
+    <result column="active_link" property="activeLink" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="message_rid" property="messageRid" jdbcType="BIGINT" />
+    <result column="content_detail" property="contentDetail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from message
+    where message_id = #{messageId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.chaos.model.Message" >
+    insert into message (message_id, title, content, 
+      status, owner, scope, type, 
+      active_link, add_time, send_time, 
+      modify_time, message_rid, content_detail
+      )
+    values (#{messageId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{status,jdbcType=BIT}, #{owner,jdbcType=VARCHAR}, #{scope,jdbcType=BIT}, #{type,jdbcType=BIT}, 
+      #{activeLink,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{sendTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{messageRid,jdbcType=BIGINT}, #{contentDetail,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.chaos.model.Message" >
+    update message
+    set title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      owner = #{owner,jdbcType=VARCHAR},
+      scope = #{scope,jdbcType=BIT},
+      type = #{type,jdbcType=BIT},
+      active_link = #{activeLink,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      send_time = #{sendTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      message_rid = #{messageRid,jdbcType=BIGINT},
+      content_detail = #{contentDetail,jdbcType=LONGVARCHAR}
+    where message_id = #{messageId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select message_id, title, content, status, owner, scope, type, active_link, add_time, 
+    send_time, modify_time, message_rid, content_detail
+    from message
+    where message_id = #{messageId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select message_id, title, content, status, owner, scope, type, active_link, add_time, 
+    send_time, modify_time, message_rid, content_detail
+    from message
+  </select>
+</mapper>

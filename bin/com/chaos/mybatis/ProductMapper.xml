@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chaos.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.chaos.model.Product" >
+    <id column="proID" property="proid" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="dtime" property="dtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product
+    where proID = #{proid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.chaos.model.Product" >
+    insert into product (proID, price, type, 
+      dtime)
+    values (#{proid,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER}, 
+      #{dtime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.chaos.model.Product" >
+    update product
+    set price = #{price,jdbcType=DECIMAL},
+      type = #{type,jdbcType=INTEGER},
+      dtime = #{dtime,jdbcType=TIMESTAMP}
+    where proID = #{proid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select proID, price, type, dtime
+    from product
+    where proID = #{proid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select proID, price, type, dtime
+    from product
+  </select>
+</mapper>

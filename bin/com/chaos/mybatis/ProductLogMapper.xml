@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chaos.dao.ProductLogMapper" >
+  <resultMap id="BaseResultMap" type="com.chaos.model.ProductLog" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="productid" property="productid" jdbcType="INTEGER" />
+    <result column="newprice" property="newprice" jdbcType="DECIMAL" />
+    <result column="oldprice" property="oldprice" jdbcType="DECIMAL" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_log
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.chaos.model.ProductLog" >
+    insert into product_log (ID, productid, newprice, 
+      oldprice)
+    values (#{id,jdbcType=INTEGER}, #{productid,jdbcType=INTEGER}, #{newprice,jdbcType=DECIMAL}, 
+      #{oldprice,jdbcType=DECIMAL})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.chaos.model.ProductLog" >
+    update product_log
+    set productid = #{productid,jdbcType=INTEGER},
+      newprice = #{newprice,jdbcType=DECIMAL},
+      oldprice = #{oldprice,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select ID, productid, newprice, oldprice
+    from product_log
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, productid, newprice, oldprice
+    from product_log
+  </select>
+</mapper>

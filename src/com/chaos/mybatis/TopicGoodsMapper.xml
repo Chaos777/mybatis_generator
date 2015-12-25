@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chaos.dao.TopicGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.chaos.model.TopicGoods" >
+    <id column="topic_goods_id" property="topicGoodsId" jdbcType="BIGINT" />
+    <result column="topic_id" property="topicId" jdbcType="BIGINT" />
+    <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+    <result column="goods_class" property="goodsClass" jdbcType="VARCHAR" />
+    <result column="goods_pic_url" property="goodsPicUrl" jdbcType="VARCHAR" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_url" property="goodsUrl" jdbcType="VARCHAR" />
+    <result column="goods_price" property="goodsPrice" jdbcType="DECIMAL" />
+    <result column="stock" property="stock" jdbcType="INTEGER" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="shop_url" property="shopUrl" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="position" property="position" jdbcType="INTEGER" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from topic_goods
+    where topic_goods_id = #{topicGoodsId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.chaos.model.TopicGoods" >
+    insert into topic_goods (topic_goods_id, topic_id, goods_id, 
+      goods_class, goods_pic_url, goods_name, 
+      goods_url, goods_price, stock, 
+      shop_name, shop_url, shop_id, 
+      position, add_time)
+    values (#{topicGoodsId,jdbcType=BIGINT}, #{topicId,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, 
+      #{goodsClass,jdbcType=VARCHAR}, #{goodsPicUrl,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
+      #{goodsUrl,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL}, #{stock,jdbcType=INTEGER}, 
+      #{shopName,jdbcType=VARCHAR}, #{shopUrl,jdbcType=VARCHAR}, #{shopId,jdbcType=BIGINT}, 
+      #{position,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.chaos.model.TopicGoods" >
+    update topic_goods
+    set topic_id = #{topicId,jdbcType=BIGINT},
+      goods_id = #{goodsId,jdbcType=BIGINT},
+      goods_class = #{goodsClass,jdbcType=VARCHAR},
+      goods_pic_url = #{goodsPicUrl,jdbcType=VARCHAR},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_url = #{goodsUrl,jdbcType=VARCHAR},
+      goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      stock = #{stock,jdbcType=INTEGER},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      shop_url = #{shopUrl,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=BIGINT},
+      position = #{position,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP}
+    where topic_goods_id = #{topicGoodsId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select topic_goods_id, topic_id, goods_id, goods_class, goods_pic_url, goods_name, 
+    goods_url, goods_price, stock, shop_name, shop_url, shop_id, position, add_time
+    from topic_goods
+    where topic_goods_id = #{topicGoodsId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select topic_goods_id, topic_id, goods_id, goods_class, goods_pic_url, goods_name, 
+    goods_url, goods_price, stock, shop_name, shop_url, shop_id, position, add_time
+    from topic_goods
+  </select>
+</mapper>
